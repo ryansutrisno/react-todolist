@@ -15,9 +15,12 @@ const TodoList = () => {
   const [showAdd, setShowAdd] = useState(false);
 
   const addTodo = value => {
-    const addedTodo = [...todos, { text: value }];
-
-    setTodos(addedTodo);
+    if (todos.length < 10) {
+      const addedTodo = [...todos, { text: value }];
+      setTodos(addedTodo);
+    } else {
+      alert("Maksimal 10 aja bosque...!");
+    }
   };
 
   const completeTodo = index => {
@@ -27,13 +30,19 @@ const TodoList = () => {
     setTodos(addedTodo);
   };
 
+  const clearTodos = () => setTodos([]);
+
   const showAddToggle = () => setShowAdd(!showAdd);
 
   console.log("todos", todos);
 
   return (
     <Paper>
-      <Header showAddToggle={showAddToggle} showAdd={showAdd} />
+      <Header
+        showAddToggle={showAddToggle}
+        showAdd={showAdd}
+        clearTodos={clearTodos}
+      />
       <TodoForm addTodo={addTodo} showAdd={showAdd} />
       <Todos todos={todos} completeTodo={completeTodo} />
     </Paper>
