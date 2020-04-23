@@ -1,8 +1,7 @@
 /** @jsx jsx */
-// import React from "react";
 import { jsx } from "@emotion/core";
 import PropTypes from "prop-types";
-import cx from "classnames";
+import { useTheme } from "emotion-theming";
 
 // import styles from "./button.module.css";
 import * as styles from "./button.styles";
@@ -15,11 +14,13 @@ const Button = ({ text, onClick, color, align }) => {
   //   [styles.alignRight]: align === "right"
   // });
 
+  const theme = useTheme();
+
   return (
     // <button className={className} onClick={onClick}>
     //   {text}
     // </button>
-    <button css={styles.button({ align, color })} onClick={onClick}>
+    <button css={styles.button({ align, color, theme })} onClick={onClick}>
       {text}
     </button>
   );
